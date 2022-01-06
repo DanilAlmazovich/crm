@@ -1,0 +1,54 @@
+@import '@suadelabs/vue3-multiselect/dist/vue3-multiselect';
+
+.app-multiselect {
+  min-height: 0;
+  &.multiselect--active {
+    .multiselect__tags {
+      border: 1px #9ca3af solid;
+    }
+  }
+  .multiselect__select {
+    padding: 0 1px 0;
+    height: 100%;
+  }
+  .multiselect__tags {
+    padding: .75rem 2.25rem .75rem .75rem;
+    margin: 0;
+    min-height: 0;
+    border: 1px #d1d5db solid;
+    border-radius: 0.5rem;
+    transition: border-color .25s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    .multiselect__placeholder, .multiselect__input, .multiselect__single {
+      padding: 0;
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: 500;
+      border: none;
+      display: block;
+    }
+  }
+  .multiselect__content-wrapper {
+    .multiselect__content {
+      .multiselect__element {
+        .multiselect__option {
+          padding: .75rem;
+          font-size: 0.875rem;
+          line-height: 1.25rem;
+          font-weight: 500;
+          color: #2a2a2a;
+          &.multiselect__option--highlight {
+            background: #e5e7eb;
+            outline: none;
+            color: #2a2a2a;
+            &.multiselect__option--selected {
+              background: #e5e7eb;
+              color: #2a2a2a;
+            }
+          }
+        }
+      }
+    }
+  }
+}
