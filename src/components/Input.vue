@@ -4,7 +4,9 @@
       v-if="labelText"
       :for="id"
       class="mb-1 ml-2 text-sm text-gray-800 font-medium cursor-pointer"
-      ><span class="after:content-star after:ml-0.5 after:text-red-500">{{ labelText }}</span></label
+      ><span class="after:content-star after:ml-0.5 after:text-red-500">{{
+        labelText
+      }}</span></label
     >
     <input
       :value="modelValue"

@@ -59,12 +59,16 @@
             >
               <icon name="eye" />
             </button>
-            <router-link :to="`/inventory/${n}`"
-                         class="w-5 mr-3 transition duration-200 hover:text-blue-300"
+            <router-link
+              :to="`/inventory/${n}`"
+              class="w-5 mr-3 transition duration-200 hover:text-blue-300"
             >
               <icon name="edit" />
             </router-link>
-            <button class="w-5 transition duration-200 hover:text-blue-300" @click.prevent="$modal.open('delete-confirmation')">
+            <button
+              class="w-5 transition duration-200 hover:text-blue-300"
+              @click.prevent="$modal.open('delete-confirmation')"
+            >
               <icon name="basket" />
             </button>
           </div>

@@ -3,7 +3,7 @@
     <div class="py-8 px-8">
       <table-header></table-header>
       <div class="py-6">
-        <component :is="`${options[$route.path].component}-table`"/>
+        <component :is="`${options[$route.path].component}-table`" />
       </div>
     </div>
   </layout>
@@ -25,31 +25,30 @@ export default {
     CustomersTable // eslint-disable-line
   },
   data() {
-      return {
-          options: {
-              '/inventory': {
-                  title: 'Новый инвентарь',
-                  url: '/inventory',
-                  component: 'inventory'
-              },
-              '/bouquets': {
-                  title: 'Новый букет',
-                  url: '/bouquets',
-                  component: 'bouquets'
-              },
-              '/customers': {
-                  title: 'Постоянные клиенты',
-                  url: '/customers',
-                  component: 'customers'
-              },
-              '/': {
-                  title: 'Новый заказ',
-                  url: '/orders',
-                  component: 'order'
-              },
-          }
-
-      }
+    return {
+      options: {
+        "/inventory": {
+          title: "Новый инвентарь",
+          url: "/inventory",
+          component: "inventory",
+        },
+        "/bouquets": {
+          title: "Новый букет",
+          url: "/bouquets",
+          component: "bouquets",
+        },
+        "/customers": {
+          title: "Постоянные клиенты",
+          url: "/customers",
+          component: "customers",
+        },
+        "/": {
+          title: "Новый заказ",
+          url: "/orders",
+          component: "order",
+        },
+      },
+    };
   },
   //  created() {
   //    this.initData();

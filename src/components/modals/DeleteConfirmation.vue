@@ -1,7 +1,5 @@
 <template>
-  <modal name="delete-confirmation">
-    подвердите удаление
-  </modal>
+  <modal name="delete-confirmation"> подвердите удаление </modal>
 </template>
 
 <script>

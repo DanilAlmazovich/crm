@@ -3,7 +3,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import "./assets/tailwind.css";
-import axiosApi from "axios";
+import axios from "./configs/axios";
 import Layout from "./layouts/Layout.vue";
 import AuthLayout from "./layouts/AuthLayout.vue";
 import Icon from "./components/Icon.vue";
@@ -13,14 +13,12 @@ import Datepicker from "vue3-date-time-picker";
 import Multiselect from "@suadelabs/vue3-multiselect";
 import Viewer from "v-viewer";
 import Modal from "./plugins/modal/plugin";
+import _ from "lodash";
 
 const app = createApp(App);
 
-const axios = axiosApi.create({
-  baseURL: process.env.VUE_APP_API_URL,
-});
-
-window.axios = axios;
+app.config.globalProperties.$axios = axios;
+app.config.globalProperties._ = _;
 
 app.component("icon", Icon);
 app.component("layout", Layout);

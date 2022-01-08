@@ -1,16 +1,13 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-  mode: 'jit',
-  purge: [
-      './public/**/*.html',
-      './src/**/*.{js,jsx,ts,tsx,vue}',
-  ],
+  mode: "jit",
+  purge: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx,vue}"],
   content: [],
   theme: {
     extend: {
       content: {
-        star: "'*'"
+        star: "'*'",
       },
       width: {
         120: "30rem",

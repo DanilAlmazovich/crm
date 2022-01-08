@@ -2,7 +2,8 @@
   <div class="flex justify-end">
     <div
       class="sidebar bg-gray-50 overflow-hidden fixed left-0"
-      :class="showSidebar ? 'w-14/100' : 'w-0'">
+      :class="showSidebar ? 'w-14/100' : 'w-0'"
+    >
       <div>
         <sidebar />
       </div>
@@ -17,7 +18,7 @@
         <slot class="mt-10" />
       </div>
     </div>
-    <delete-confirmation/>
+    <delete-confirmation />
   </div>
 </template>
 
@@ -29,7 +30,7 @@ export default {
   components: {
     VHeader,
     Sidebar,
-    DeleteConfirmation
+    DeleteConfirmation,
   },
   data() {
     return {
