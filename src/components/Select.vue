@@ -12,6 +12,7 @@
       :maxHeight="400"
       id="status"
       :options="options"
+      @close="$emit('update:modelValue', this.selected)"
     />
   </div>
 </template>
@@ -21,6 +22,7 @@ export default {
   props: {
     options: {
       type: Object,
+      modelValue: String
     },
   },
   data() {
@@ -30,5 +32,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss"></style>

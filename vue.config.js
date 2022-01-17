@@ -1,5 +1,5 @@
 module.exports = {
   devServer: {
-    host: "crm-server.test",
+    host: "crm.localhost",
   }
 }

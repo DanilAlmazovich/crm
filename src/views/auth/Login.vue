@@ -26,7 +26,7 @@
             v-model="form.password"
           />
         </div>
-        <v-button class="bg-blue-300" :disabled="loading" @click.prevent="login"
+        <v-button class="bg-blue-300 p-3 w-80 rounded-lg" :disabled="loading" @click.prevent="login"
           >Log in</v-button
         >
       </form>

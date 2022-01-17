@@ -48,9 +48,9 @@ export default {
   data() {
     return {
       title: {
-        "/inventory": {
+        "/inventories": {
           titleButton: "Новый инвентарь",
-          url: "/inventory",
+          url: "/inventories",
           title: "Главное",
         },
         "/bouquets": {

@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <router-view />
+    <notifications position="bottom right" />
   </div>
 </template>
 
@@ -30,5 +31,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import "scss/app";
+@import "assets/scss/app";
 </style>

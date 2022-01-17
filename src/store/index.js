@@ -21,7 +21,6 @@ export default createStore({
         axios
           .get("/me")
           .then(({ data }) => {
-            console.log(data);
             commit("setUser", data);
 
             resolve(data);

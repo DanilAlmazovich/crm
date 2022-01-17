@@ -1,148 +1,181 @@
 <template>
-  <layout>
-    <div class="py-8 px-8">
-      <h1 class="font-semibold text-lg">
-        {{ titles[this.$route.path.split("/")["1"]] }}
-      </h1>
-      <form action="" class="py-8">
-        <div
-          class="mb-8"
-          v-for="field in fields[$route.path.split('/')['1']]"
-          :key="field.title"
-        >
-          <component
-            class="w-120"
-            :options="field.options"
-            :type="field.type"
-            :maska="field.mask"
-            :labelText="field.title"
-            :is="`v-${field.component}`"
-          />
+    <layout>
+        <div class="py-8 px-8">
+            <h1 class="font-semibold text-lg">
+                {{ titles[$route.path.split('/')['1']] }}
+            </h1>
+            <form class="py-8" enctype="multipart/form-data">
+                <div class="mb-8"
+                     v-for="field in fields[$route.path.split('/')['1']]"
+                     :key="field.title">
+                    <component
+                            class="w-120"
+                            :options="field.options"
+                            :type="field.type"
+                            :maska="field.mask"
+                            :labelText="field.title"
+                            v-model="form[field.name]"
+                            :is="`v-${field.component}`"
+                            :required="field.required"
+                            :errorMessage="errors ? errors[field.name] : ''"
+                    />
+                </div>
+                <div class="py-8">
+                    <v-button class="bg-blue-300 p-3 w-44 rounded-lg" :disabled="loading" @click.prevent="create">
+                        Сохранить
+                    </v-button>
+                </div>
+            </form>
         </div>
-        <div class="py-8">
-          <v-button class="bg-blue-300 p-3 w-44 rounded-lg">Сохранить</v-button>
-        </div>
-      </form>
-      <modal name="auth">
-        <template #title>
-          <h1>Here might be a page title</h1>
-        </template>
-        <div>fdsfdsfdsf</div>
-      </modal>
-    </div>
-  </layout>
+    </layout>
 </template>
 
 <script>
-import VInputFile from "@/components/InputFile";
-import VDatePicker from "@/components/DatePicker";
-import VSelect from "@/components/Select";
-export default {
-  name: "",
-  components: {
-    VInputFile,
-    VDatePicker,
-    VSelect,
-  },
-  data() {
-    return {
-      titles: {
-        orders: "Регистрация заказа",
-        inventory: "Регистрация инвентаря",
-        bouquets: "Создание букета",
-      },
-      fields: {
-        orders: [
-          {
-            title: "ФИО",
-            component: "input",
-            type: "text",
-          },
-          {
-            title: "Адрес доставки",
-            component: "input",
-            type: "text",
-          },
-          {
-            title: "Номер телефона",
-            component: "input",
-            type: "text",
-            mask: ["+996 (###) ##-##-##", "+996 (###) ##-##-##"],
-          },
-          {
-            title: "Время доставки",
-            component: "date-picker",
-          },
-          {
-            title: "Статус",
-            component: "select",
-            options: [
-              "list",
-              "of",
-              "options1",
-              "list1",
-              "of1",
-              "options2",
-              "list2",
-              "of2",
-              "options3",
-            ],
-          },
-          {
-            title: "ФИО",
-            component: "input-file",
-          },
-        ],
-        inventory: [
-          {
-            title: "Название",
-            component: "input",
-            type: "text",
-          },
-          {
-            title: "Количество",
-            component: "input",
-            type: "text",
-          },
-          {
-            title: "Изображение",
-            component: "input-file",
-          },
-        ],
-        bouquets: [
-          {
-            title: "Название",
-            component: "input",
-            type: "text",
-          },
-          {
-            title: "Цена",
-            component: "input",
-            type: "text",
-          },
-          {
-            title: "Цветок",
-            component: "select",
-            options: [
-              "list",
-              "of",
-              "options1",
-              "list1",
-              "of1",
-              "options2",
-              "list2",
-              "of2",
-              "options3",
-            ],
-          },
-          {
-            title: "Количество",
-            component: "input",
-            type: "text",
-          },
-        ],
-      },
+    import VInputFile from "@/components/InputFile";
+    import VDatePicker from "@/components/DatePicker";
+    import VSelect from "@/components/Select";
+    export default {
+        name: "",
+        components: {
+            VInputFile,
+            VDatePicker,
+            VSelect,
+        },
+        data() {
+            return {
+                form: {},
+                loading: false,
+                errors: null,
+                titles: {
+                    orders: "Регистрация заказа",
+                    inventories: "Регистрация инвентаря",
+                    bouquets: "Создание букета",
+                },
+                fields: {
+                    orders: [
+                        {
+                            title: "ФИО",
+                            component: "input",
+                            type: "text",
+                        },
+                        {
+                            title: "Адрес доставки",
+                            component: "input",
+                            type: "text",
+                        },
+                        {
+                            title: "Номер телефона",
+                            component: "input",
+                            type: "text",
+                            mask: ["+996 (###) ##-##-##", "+996 (###) ##-##-##"],
+                        },
+                        {
+                            title: "Время доставки",
+                            component: "date-picker",
+                        },
+                        {
+                            title: "Статус",
+                            component: "select",
+                            options: [
+                                "list",
+                                "of",
+                                "options1",
+                                "list1",
+                                "of1",
+                                "options2",
+                                "list2",
+                                "of2",
+                                "options3",
+                            ],
+                        },
+                        {
+                            title: "ФИО",
+                            component: "input-file",
+                        },
+                    ],
+                    inventories: [
+                        {
+                            name: 'name',
+                            title: "Название",
+                            component: "input",
+                            type: "text",
+                            required: true,
+                        },
+                        {
+                            name: 'quantity',
+                            title: "Количество",
+                            component: "input",
+                            type: "text",
+                            required: true,
+                        },
+                        {
+                            name: 'image',
+                            title: "Изображение",
+                            component: "input-file",
+                            required: false,
+                        },
+                    ],
+                    bouquets: [
+                        {
+                            title: "Название",
+                            component: "input",
+                            type: "text",
+                        },
+                        {
+                            title: "Цена",
+                            component: "input",
+                            type: "text",
+                        },
+                        {
+                            title: "Цветок",
+                            component: "select",
+                            options: [
+                                "list",
+                                "of",
+                                "options1",
+                                "list1",
+                                "of1",
+                                "options2",
+                                "list2",
+                                "of2",
+                                "options3",
+                            ],
+                        },
+                        {
+                            title: "Количество",
+                            component: "input",
+                            type: "text",
+                        },
+                    ],
+                },
+            };
+        },
+
+        methods: {
+            create() {
+                this.loading = true
+                let formData = new FormData()
+                for (let key in this.form) {
+                    formData.append(key, this.form[key])
+                }
+
+                this.$axios
+                    .post('/inventories/store', formData)
+                    .then(() => {
+                        this.$notify("Инвентарь успешно создан!")
+                        this.form = {}
+                        this.loading = false
+                        this.errors = null
+                    })
+                    .catch((e) => {
+                        let errors = {}
+                        for (let key in e.data.errors) {
+                            errors[key] = e.data.errors[key][0]
+                        }
+                        this.errors = errors
+                        this.loading = false
+                    })
+            }
+        }
     };
-  },
-};
 </script>

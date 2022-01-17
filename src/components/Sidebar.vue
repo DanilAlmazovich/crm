@@ -45,7 +45,7 @@ export default {
         },
         {
           title: "Инвентарь",
-          url: "/inventory",
+          url: "/inventories",
           icon: "inventory",
         },
         {

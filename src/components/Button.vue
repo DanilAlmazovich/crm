@@ -1,7 +1,7 @@
 <template>
   <button
     :type="type"
-    class="text-sm border border-gray-300 text-center font-medium flex items-center justify-center disabled:cursor-not-allowed hover:bg-opacity-75 disabled:bg-opacity-100 transition duration-200 border-none text-white"
+    class="text-sm text-center font-medium flex items-center justify-center disabled:cursor-not-allowed hover:bg-opacity-75 disabled:bg-opacity-100 transition duration-200 text-white"
     :disabled="disabled"
   >
     <spinner v-if="disabled"></spinner>

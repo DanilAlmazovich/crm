@@ -33,22 +33,28 @@ const routes = [
   // inventory
 
   {
-    path: "/inventory",
-    name: "Inventory",
+    path: "/inventories",
+    name: "Inventories",
     component: () =>
       import(/* webpackChunkName: "inventory" */ "../views/Index.vue"),
   },
   {
-    path: "/inventory/create",
+    path: "/inventories/create",
     name: "InventoryCreate",
     component: () =>
       import(/* webpackChunkName: "inventory-create" */ "../views/Create.vue"),
   },
   {
-    path: "/inventory/:id",
+    path: "/inventories/edit/:id",
     name: "InventoryEdit",
     component: () =>
       import(/* webpackChunkName: "inventory-edit" */ "../views/Edit.vue"),
+  },
+  {
+      path: "/inventories/show/:id",
+      name: "InventoryDetail",
+      component: () =>
+          import(/* webpackChunkName: "inventory-detail" */ "../views/Detail.vue"),
   },
 
   // bouquets
