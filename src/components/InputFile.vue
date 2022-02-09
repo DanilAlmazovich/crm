@@ -8,12 +8,17 @@
             labelText
             }}</span></label
         >
-        <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                type="file"
-                :id="id"
-                multiple="multiple"
-                @change="onChangeFileUpload"
-        />
+        <div class="flex items-center">
+            <input class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   type="file"
+                   :id="id"
+                   multiple="multiple"
+                   @change="onChangeFileUpload"
+            />
+            <div v-if="url || modelValue">
+                <img class="w-8 h-8" :src="url || asset(modelValue)" alt="">
+            </div>
+        </div>
     </div>
 </template>
 
@@ -21,7 +26,7 @@
     export default {
         props: {
             modelValue: {
-                type: File,
+                type: [File, String],
             },
             id: {
                 type: String,
@@ -30,18 +35,20 @@
             labelText: String,
             required: Boolean
         },
+
         data() {
             return {
-                image: ''
+                image: '',
+                url: ''
             };
         },
+
         methods: {
             onChangeFileUpload(e) {
                 this.image = e.target.files[0]
+                this.url = URL.createObjectURL(e.target.files[0])
                 this.$emit('update:modelValue', this.image)
             },
         }
     };
 </script>
-
-<style scoped lang="scss"></style>

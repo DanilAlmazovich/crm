@@ -1,11 +1,11 @@
 <template>
   <router-link
-    :to="url"
+    :to="`/${url}`"
     class="flex items-center mb-6 transition duration-150"
-    :class="url === $route.path ? 'text-blue-300 hover:text-blue-300' : 'text-gray-800 hover:text-gray-900'"
+    :class="`/${url}` === $route.path && url === $route.path.split('/')[1]  ? 'text-blue-300 hover:text-blue-300' : 'text-gray-800 hover:text-gray-900'"
   >
     <icon :name="icon" class="w-5 h-5 fill-current mr-2" />
-    <span class="font-semibold whitespace-nowrap text-sm">{{ title }}</span>
+    <span class="font-semibold text-sm min-w-max border-b-2 leading-snug" :class="url === $route.path.split('/')[1] ? 'border-blue-300' : 'border-transparent'">{{ title }}</span>
   </router-link>
 </template>
 

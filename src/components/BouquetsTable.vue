@@ -1,96 +1,102 @@
 <template>
-  <table class="min-w-full leading-normal">
-    <thead>
-      <tr>
-        <th
-          class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-        >
-          #
-        </th>
-        <th
-          class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-        >
-          Название
-        </th>
-        <th
-          class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-        >
-          Цена
-        </th>
-        <th
-          class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-        >
-          Цветок
-        </th>
-        <th
-          class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-        >
-          Количество
-        </th>
-        <th
-          class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
-        ></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="n in 20" :key="n">
-        <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">{{ n }}</p>
-        </td>
-        <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">Тюльпаны букет</p>
-        </td>
-        <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">
-            400<span class="ml-1">сом</span>
-          </p>
-        </td>
-        <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">Тюльпан</p>
-        </td>
-        <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-          <p class="text-gray-900 whitespace-no-wrap">
-            200<span class="ml-1">шт</span>
-          </p>
-        </td>
-        <td class="px-4 py-4 border-b border-gray-200 bg-white text-sm">
-          <div class="flex item-center justify-center">
-            <button
-              class="w-5 mr-3 transition duration-200 hover:text-blue-300"
+    <table class="min-w-full leading-normal" v-if="tableData">
+        <thead>
+        <tr>
+            <th
+                    class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
             >
-              <icon name="eye" />
-            </button>
-            <router-link
-              :to="`/bouquets/${n}`"
-              class="w-5 mr-3 transition duration-200 hover:text-blue-300"
+                #
+            </th>
+            <th
+                    class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
             >
-              <icon name="edit" />
-            </router-link>
-            <button
-              class="w-5 transition duration-200 hover:text-blue-300"
-              @click.prevent="$modal.open('delete-confirmation')"
+                Название
+            </th>
+            <th
+                    class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
             >
-              <icon name="basket" />
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+                Цена
+            </th>
+            <th
+                    class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+                Изображение
+            </th>
+            <!--<th-->
+            <!--class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"-->
+            <!--&gt;-->
+            <!--Цветок-->
+            <!--</th>-->
+            <!--<th-->
+            <!--class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"-->
+            <!--&gt;-->
+            <!--Количество-->
+            <!--</th>-->
+            <th
+                    class="px-4 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider w-40"
+            ></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="(item, i) in tableData.data" :key="i">
+            <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm">
+                <p class="text-gray-900 whitespace-no-wrap">{{ i + 1 }}</p>
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm">
+                <p class="text-gray-900 whitespace-no-wrap">{{ item.name }}</p>
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm">
+                <p class="text-gray-900 whitespace-no-wrap">
+                    {{ item.price }}<span class="ml-1">сом</span>
+                </p>
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm">
+                <div v-if="item.image" v-viewer="{ movable: false, navbar: false, toolbar: false }"
+                     class="w-8 h-8 rounded-full border-2 border-gray-50 shadow overflow-hidden cursor-pointer">
+                    <img :src="asset(item.image)" alt="..."/>
+                </div>
+                <div class="rounded-full shadow overflow-hidden w-8 h-8" v-else>
+                    <icon name="default-image" class="fill-current text-gray-300" />
+                </div>
+            </td>
+            <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm w-40">
+                <div class="flex item-center justify-end pr-2">
+                    <router-link
+                            :to="`/bouquets/show/${item.id}`"
+                            class="w-5 mr-3 text-gray-600 transition duration-200 hover:text-blue-300"
+                    >
+                        <icon name="eye" class="fill-current"/>
+                    </router-link>
+                    <router-link
+                            :to="`/bouquets/edit/${item.id}`"
+                            class="w-5 mr-3 text-gray-600 transition duration-200 hover:text-blue-300"
+                    >
+                        <icon name="edit" class="fill-current"/>
+                    </router-link>
+                    <button
+                            class="w-5 text-gray-600 transition duration-200 hover:text-blue-300"
+                            @click.prevent="$modal.question().then(() => deleteItem(item.id))"
+                    >
+                        <icon name="basket" class="fill-current"/>
+                    </button>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </template>
 
 <script>
-export default {
-  name: "",
-  data() {
-    return {
-      images: [
-        "https://i1.wp.com/lavka-flowers.ru/wp-content/uploads/2018/04/avtorskiy-30000.jpg?fit=1456%2C1456&ssl=1",
-        "https://www.roza4u.ru/image/cache/catalog/buket-bombastic/IMG_0207-1400x1400.jpg",
-        "https://www.rosemarkt.ru/resources/data/photos/5cd817df83761/big.jpg",
-        "https://proprikol.ru/wp-content/uploads/2020/04/bukety-czvetov-krasivye-kartinki-1.jpg",
-      ],
+    export default {
+        props: {
+            tableData: {
+                type: Object,
+            }
+        },
+        methods: {
+            deleteItem(id) {
+                this.$emit('delete', id)
+            }
+        }
     };
-  },
-};
 </script>

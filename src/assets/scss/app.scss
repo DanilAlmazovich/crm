@@ -1,4 +1,4 @@
-@import 'vue3-date-time-picker/src/Vue3DatePicker/style/main.scss';
+//@import 'vue3-date-time-picker/src/Vue3DatePicker/style/main.scss';
 @import 'select';
 @import 'viewerjs/dist/viewer';
 
@@ -49,4 +49,24 @@ textarea:focus {
   & > div {
     display: none;
   }
+}
+
+.vue-notification-group {
+  .vue-notification-wrapper {
+    .vue-notification-template {
+      padding: 10px;
+      &.success {
+        background: #62c17e;
+      }
+      .notification-title {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+.input-number::-webkit-outer-spin-button,
+.input-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

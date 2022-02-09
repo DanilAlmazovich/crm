@@ -11,10 +11,11 @@
           <span class="text-sm mr-2 font-medium">
             {{ user.first_name }} {{ user.last_name }}
           </span>
+
           <span
-            class="w-5 h-5border border-gray-300 rounded-full overflow-hidden"
+            class="w-5 h-5 border border-gray-300 rounded-full overflow-hidden"
           >
-            <img class="m-auto" src="../assets/logo.png" />
+            <icon class="fill-current text-gray-500" name="profile"/>
           </span>
         </button>
       </div>

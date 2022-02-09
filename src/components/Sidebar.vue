@@ -3,9 +3,9 @@
     class="min-h-screen max-h-screen py-2 px-4 flex flex-col items-start justify-between"
   >
     <div>
-      <router-link to="/" class="flex justify-start items-center mb-10">
-        <img class="w-10 h-10 mr-1" src="../assets/logo.png" />
-        <span class="text-2xl font-bold uppercase text-gray-800">Vue</span>
+      <router-link to="/" class="flex justify-start items-end mb-10">
+        <img class="w-12 h-12" src="../assets/logo.png" />
+        <span class="text-xl font-bold uppercase text-gray-800">CRM</span>
       </router-link>
       <div class="py-6">
         <sidebar-link
@@ -34,29 +34,29 @@ export default {
     return {
       menuLinks: [
         {
-          title: "Главное",
-          url: "/",
-          icon: "home",
+          title: 'Главное',
+          url: 'orders',
+          icon: 'home',
         },
         {
-          title: "Статистика",
-          url: "/statistic",
-          icon: "statistic",
+          title: 'Статистика',
+          url: 'statistic',
+          icon: 'statistic',
         },
         {
-          title: "Инвентарь",
-          url: "/inventories",
-          icon: "inventory",
+          title: 'Инвентарь',
+          url: 'inventories',
+          icon: 'inventory',
         },
         {
-          title: "Готовые букеты",
-          url: "/bouquets",
-          icon: "bouquets",
+          title: 'Готовые букеты',
+          url: 'bouquets',
+          icon: 'bouquets',
         },
         {
-          title: "Постоянные клиенты",
-          url: "/customers",
-          icon: "customers",
+          title: 'Постоянные клиенты',
+          url: 'customers',
+          icon: 'customers',
         },
       ],
     };

@@ -9,10 +9,9 @@
                 class="w-120 date-picker"
                 v-model="date"
                 locale="ru"
-                :enableTimePicker="false"
+                textInput
                 autoApply
-                showNowButton
-                format="dd-MM-yyyy"
+                format="dd-MM-yyyy hh:mm"
         >
             <template #dp-input="{ value }">
                 <div>
@@ -31,21 +30,26 @@
 <script>
     export default {
         props: {
+            modelValue: {
+                type: [String, Date],
+                default: new Date(),
+            },
             id: {
                 type: String,
                 default: "",
             },
             labelText: String,
             required: Boolean,
-            modelValue: String
         },
+
         computed: {
             date: {
                 get() {
-                    return new Date();
+                    return this.modelValue;
                 },
                 set(val) {
-                    this.$emit('update:modelValue', this.moment(val).format('LLL'))
+                    this.$emit('update:modelValue', this.moment(val).format('YYYY.MM.DD HH:mm:ss'))
+//                    this.$emit('update:modelValue', this.moment(val).format('LLL'))
                 },
             }
         }

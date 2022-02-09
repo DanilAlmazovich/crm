@@ -1,8 +1,12 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
+const {colors} = defaultTheme
 
 module.exports = {
-  // mode: "jit",
-  // purge: ["./public/**/*.html", "./src/**/*.{js,jsx,ts,tsx,vue}"],
+  mode: "jit",
+  purge: [
+      './public/**/*.html',
+      './src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
   content: [],
   theme: {
     extend: {
@@ -18,6 +22,7 @@ module.exports = {
         sans: ["Inter", "Nunito", ...defaultTheme.fontFamily.sans],
       },
       colors: {
+        ...colors,
         blue: {
           250: "#00c3ff",
           300: "#00acf3",
@@ -33,7 +38,8 @@ module.exports = {
     extend: {
       backgroundOpacity: ["disabled"],
       cursor: ["disabled"],
+      background: ["disabled"],
     },
   },
-  plugins: [require("@tailwindcss/forms")],
+  // plugins: [require("@tailwindcss/forms")],
 };
