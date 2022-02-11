@@ -89,8 +89,10 @@
                 }
             },
             updateValue(event) {
-                if (Number(event.target.value) > Number(this.max) || Number(event.target.value) < 0) {
-                    this.count = this.max
+                if(this.max.length) {
+                    if (Number(event.target.value) > Number(this.max) || Number(event.target.value) < 0) {
+                        this.count = this.max
+                    }
                 }
                 this.$forceUpdate()
             }

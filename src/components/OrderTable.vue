@@ -40,7 +40,7 @@
         <tbody>
         <tr v-for="(item, i) in tableData.data" :key="item.id">
             <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm">
-                <p class="text-gray-900 whitespace-no-wrap">{{ i + 1 }}</p>
+                <p class="text-gray-900 whitespace-no-wrap">{{ i + tableData.from }}</p>
             </td>
             <td class="px-4 py-2 border-b border-gray-200 bg-white text-sm">
                 <p class="text-gray-900 whitespace-no-wrap">{{ item.full_name }}</p>
