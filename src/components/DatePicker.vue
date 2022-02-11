@@ -49,7 +49,6 @@
                 },
                 set(val) {
                     this.$emit('update:modelValue', this.moment(val).format('YYYY.MM.DD HH:mm:ss'))
-//                    this.$emit('update:modelValue', this.moment(val).format('LLL'))
                 },
             }
         }

@@ -18,7 +18,9 @@
                     :required="required"
                     v-maska="maska"
                     :id="id"
+                    :max="max"
                     type="number"
+                    @input="updateValue"
                     ref="input"
                     :placeholder="placeholder"
                     class="border border-solid border-gray-300 rounded-lg p-3 text-sm focus:border-gray-400 transition duration-150 w-full text-gray-800 input-number mx-4 w-[22rem] disabled:cursor-not-allowed disabled:bg-gray-50"
@@ -51,6 +53,10 @@
                 type: String,
                 default: "",
             },
+            max: {
+                type: String,
+                default: ''
+            },
             labelText: String,
             errorMessage: String,
             placeholder: String,
@@ -73,12 +79,20 @@
 
         methods: {
             plus() {
-                this.count++
+                if(this.count < this.max) {
+                    this.count++
+                }
             },
             minus() {
                 if(this.count > 0) {
                     this.count--
                 }
+            },
+            updateValue(event) {
+                if (Number(event.target.value) > Number(this.max) || Number(event.target.value) < 0) {
+                    this.count = this.max
+                }
+                this.$forceUpdate()
             }
         }
     };

@@ -8,7 +8,7 @@
                      :key="field.title">
                     <component
                             class="w-120"
-                            :options="field.options"
+                            :path="field.path"
                             :type="field.type"
                             :maska="field.mask"
                             :labelText="field.title"
@@ -54,19 +54,15 @@
                     .then((response) => {
                         this.form = response.data
                     })
-                    .catch(() => {
-
+                    .catch((e) => {
+                        console.log(e)
                     })
             },
             updateData() {
                 this.loading = true
                 let formData = new FormData()
                 for (let key in this.form) {
-                    if(key === 'image' && typeof(this.form['image']) === 'string') {
-                        console.log('string' + ' ' + key)
-                    }else {
-                        formData.append(key, this.form[key])
-                    }
+                    formData.append(key, this.form[key])
                 }
 
                 this.$axios

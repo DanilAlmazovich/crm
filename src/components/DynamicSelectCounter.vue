@@ -6,12 +6,17 @@
             </div>
             <div>
                 <div class="mb-4">
-                    <v-select v-model="item['id']" :options="options" :labelText="labelText[0]" class="w-120"
+                    <v-search-select v-model="item['option']" :labelText="labelText[0]" class="w-120"
+                              :search-path="path"
                               :required="required"/>
                 </div>
-                <div class="mb-4">
+                <div class="mb-4" v-if="path === 'inventories'">
                     <v-counter v-model="item['q']" :labelText="labelText[1]" class="w-120"
-                               :disabled="item.id ? false : true" :required="required"/>
+                               :disabled="item.option ? false : true" :max="item?.option?.quantity" :required="required"/>
+                </div>
+                <div class="mb-4" v-if="path === 'bouquets'">
+                    <v-input v-model="item['q']" :labelText="labelText[1]" class="w-120" :default-value="item?.option?.price"
+                               disabled :required="required"/>
                 </div>
                 <p class="text-sm text-red-600 pl-2" v-if="errorMessage">
                     {{ errorMessage }}
@@ -40,8 +45,8 @@
             labelText: {
                 type: Array
             },
-            options: {
-                type: Array
+            path: {
+                type: String
             },
             required: Boolean,
             errorMessage: String,
@@ -59,13 +64,13 @@
                 let items = []
                 for (let key in this.modelValue) {
                     items.push({
-                        id: key,
+                        option: key,
                         q: this.modelValue[key]
                     })
                 }
                 this.form = items
             } else {
-                this.form = [{id: null, q: 0}]
+                this.form = [{option: null, q: 0}]
             }
         },
 
@@ -82,8 +87,8 @@
             change() {
                 let items = {}
                 for (let key in this.form) {
-                    if (this.form[key].id) {
-                        items[this.form[key].id] = this.form[key].q
+                    if (this.form[key].option) {
+                        items[this.form[key].option.id] = this.form[key].q
                     }
                     if (Object.keys(items).length !== 0) {
                         this.$emit('update:modelValue', JSON.stringify(items))
@@ -92,7 +97,7 @@
 
             },
             addField(index) {
-                this.form.splice(index + 1, 0, {id: null, q: 0})
+                this.form.splice(index + 1, 0, {option: null, q: 0})
             },
             removeField(index) {
                 if(index >= 1) {

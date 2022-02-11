@@ -8,15 +8,15 @@
             labelText
             }}</span></label
         >
-        <input
-                :value="modelValue"
+        <input  :disabled="disabled"
+                :value="modelValue || defaultValue"
                 :required="required"
                 v-maska="maska"
                 :id="id"
                 ref="input"
                 :type="type"
                 :placeholder="placeholder"
-                class="border border-solid border-gray-300 rounded-lg p-3 text-sm focus:border-gray-400 transition duration-150 w-full text-gray-800"
+                class="border border-solid border-gray-300 rounded-lg p-3 text-sm focus:border-gray-400 transition duration-150 w-full text-gray-800 disabled:cursor-not-allowed disabled:bg-gray-50"
                 @input="$emit('update:modelValue', $event.target.value)"
         />
         <p class="text-sm text-red-600 pl-2" v-if="errorMessage">
@@ -26,30 +26,39 @@
 </template>
 
 <script>
-    import {maska} from "maska";
+    import {maska} from 'maska'
 
     export default {
         directives: {maska},
         props: {
             modelValue: {
                 type: [Number, String],
-                default: "",
+                default: '',
             },
             id: {
                 type: String,
-                default: "",
+                default: '',
             },
             labelText: String,
             type: {
                 type: String,
-                default: "text",
+                default: 'text',
             },
             errorMessage: String,
             placeholder: String,
             maska: {
                 type: Array,
             },
-            required: Boolean
+            required: Boolean,
+            disabled: {
+                type: Boolean,
+                default: false
+            },
+            defaultValue: {
+                type: [String, Number],
+                default: ''
+
+            }
         },
     };
 </script>

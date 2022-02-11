@@ -22,8 +22,8 @@ import Breadcrumbs from './components/Breadcrumbs.vue';
 // fields
 import VInputFile from '@/components/InputFile'
 import VDatePicker from '@/components/DatePicker'
-import VSelect from '@/components/Select'
-import VDynamicSelect from '@/components/DynamicSelect'
+import VSearchSelect from '@/components/SearchSelect'
+import VDynamicSelectCounter from '@/components/DynamicSelectCounter'
 import VCounter from '@/components/Counter'
 
 const app = createApp(App);
@@ -43,8 +43,8 @@ app.component('pagination', Pagination);
 app.component('breadcrumbs', Breadcrumbs);
 app.component('v-input-file', VInputFile);
 app.component('v-date-picker', VDatePicker);
-app.component('v-select', VSelect);
-app.component('v-dynamic-select', VDynamicSelect);
+app.component('v-search-select', VSearchSelect);
+app.component('v-dynamic-select-counter', VDynamicSelectCounter);
 app.component('v-counter', VCounter);
 
 app.use(Viewer);

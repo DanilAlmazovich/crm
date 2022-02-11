@@ -8,7 +8,7 @@
                      :key="field.name">
                     <component
                             class="w-120"
-                            :options="field.options"
+                            :path="field.path"
                             :type="field.type"
                             :maska="field.mask"
                             :labelText="field.title"

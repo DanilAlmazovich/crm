@@ -12,21 +12,24 @@
                 v-model="selected"
                 class="app-multiselect w-120"
                 :showLabels="false"
-                :maxHeight="400"
+                :maxHeight="600"
                 :id="id"
                 :options="options"
                 :internal-search="false"
                 @search-change="asyncFind"
-        />
+                track-by="name" label="name"
+                :clear-on-select="false"
+                :preserve-search="true"
+        ><template v-slot:noResult><span>По поиску нет результата</span></template></multiselect>
     </div>
 </template>
 
 <script>
     export default {
         props: {
-            options: {
-                type: Array,
-                default: () => []
+            searchPath: {
+                type: String,
+                default: ''
             },
             modelValue: {
                 type: [String, Object, Number]
@@ -41,8 +44,13 @@
 
         data() {
             return {
-                q: ''
+                options: []
+//                q: ''
             }
+        },
+
+        created() {
+            this.asyncFind()
         },
 
         computed: {
@@ -52,14 +60,24 @@
                 },
                 set(val) {
                     this.$emit('update:modelValue', val)
-                    console.log(val)
                 }
             }
         },
         methods: {
             asyncFind (query) {
-                console.log(query)
-                this.q = query
+                let params = {}
+                params['keywords'] = query
+                this.$axios
+                    .get(`/${this.searchPath}/search`, {params: params})
+                    .then((response) => {
+//                    let options = response.data.map(item => ({
+//                        id: item.id,
+//                        name: item.name,
+//                        quantity: item.quantity,
+//                    }))
+//                        this.options = options
+                        this.options = response.data
+                    })
             },
         }
     };
