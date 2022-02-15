@@ -1,13 +1,13 @@
 <template>
     <layout>
         <div class="py-8 px-8"  v-cloak>
-            <table-header></table-header>
+            <table-header/>
             <div v-if="options[$route.path]?.items?.data?.length && !loading">
                 <div class="py-6">
                     <component @delete="deleteItem" :is="`${options[$route.path].component}-table`" :table-data="options[$route.path].items"/>
                 </div>
                 <div class="flex justify-end pt-8">
-                    <pagination :data="options[$route.path]?.items" @change="initData"/>
+                    <pagination :data="options[$route.path]?.items"/>
                 </div>
             </div>
             <div class="py-12" v-if="!options[$route.path]?.items?.data?.length && !loading">
@@ -49,10 +49,8 @@
             Filters,
             Confirmation
         },
-        name: 'Index',
         data() {
             return {
-                params: {},
                 loading: false,
                 options: {
                     '/inventories': {
@@ -76,7 +74,6 @@
         },
 
         created() {
-            this.params = this.$route.query
             this.initData()
         },
 
@@ -85,17 +82,10 @@
         },
 
         methods: {
-            initData(params) {
-                let path = this.$route.path
-                if(path === '/') {
-                    path = 'orders'
-                }
+            initData() {
                 this.loading = true
-                if(params) {
-                    this.params = params
-                }
                 this.$axios
-                    .get(path, {params: this.params})
+                    .get(this.$route.path, {params: this.$route.query})
                     .then((response) => {
                         this.options[this.$route.path].items = response.data
                     })

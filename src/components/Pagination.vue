@@ -45,8 +45,6 @@
 
 <script>
     export default {
-        name: "pagination",
-
         props: {
             data: {
                 type: Object,
@@ -56,8 +54,11 @@
         },
         methods: {
             changePageTo(page) {
-                this.$router.push({path: 'inventories', query: {page: page}})
-                this.$emit('change', {page: page})
+                let query = {
+                    ...this.$route.query,
+                    page: page
+                }
+                this.$router.push({query})
             },
         }
     }
